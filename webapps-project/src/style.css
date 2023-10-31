@@ -1,0 +1,40 @@
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    color: blue;
+}
+
+h2 {
+    color: red;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font: .8em sans-serif;
+    background-color: lightgray;
+}
+
+header {
+    align-items: center;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+}
+
+#howToPlay {
+    max-width: 20%;
+}
+
+#gameBorder {
+    align-self: center;
+    border: 2px solid black;
+    border-radius: 3px;
+    width: 950px;
+    height: 600px;
+}
