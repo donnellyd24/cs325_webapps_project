@@ -1,9 +1,10 @@
-UPDATE_INTERVAL = 30 // milliseconds
+UPDATE_INTERVAL = 15 // milliseconds
 
 const $gameBoard = document.getElementById('gameBoard')
 const $scoreInput = document.getElementById('score');
 
 const mineList = []
+const scoreCircleList = []
 
 let score = 0;
 let timerId = null;
@@ -12,7 +13,7 @@ $scoreInput.value = score;
 
 document.addEventListener('DOMContentLoaded', () => {
     initGamePieces();
-    // playGame()
+    playGame();
     gameBoard.addEventListener('click', (ev) => {
         if(ev.target.classList.contains('scoreCircle')) {
             updateScore(ev.target.dataset.points)
@@ -23,9 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initGamePieces() {
     const $mines = document.querySelectorAll('.mine')
+    const scoreCircles = document.querySelectorAll('.scoreCircle')
     for (let m of $mines) {
         const mine = new Mine(m)
         mineList.push(mine)
+    }
+    for(let c of scoreCircles) {
+        const circle = new ScoreCircle(c)
+        scoreCircleList.push(circle)
     }
 }
 
@@ -35,9 +41,11 @@ function playGame() {
 }
 
 function moveGamePieces() {
-    for (let mine of mineList) {
-        mine.el.style.left = 100 + 'px';
-        mine.el.style.top = 100 + 'px';
+    for (let m of mineList) {
+        m.updateLocation();
+    }
+    for (let c of scoreCircleList) {
+        c.updateLocation();
     }
 }
 
