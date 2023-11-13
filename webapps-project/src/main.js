@@ -14,13 +14,16 @@ $scoreInput.value = score;
 document.addEventListener('DOMContentLoaded', () => {
     initGamePieces();
     playGame();
-    gameBoard.addEventListener('click', (ev) => {
-        if(ev.target.classList.contains('scoreCircle')) {
-            updateScore(ev.target.dataset.points)
-        }
-        if(ev.target.classList.contains('mine')) console.log('this should end the game')
-    })
+    $gameBoard.addEventListener('click', handleGamePieceClicked)
 })
+
+function handleGamePieceClicked(ev) {
+    if(ev.target.classList.contains('scoreCircle')) updateScore(ev.target.dataset.points)
+        if(ev.target.classList.contains('mine')) {
+            console.log('this should end the game')
+            handleMineClick();
+        }
+}
 
 function initGamePieces() {
     const $mines = document.querySelectorAll('.mine')
@@ -53,4 +56,14 @@ function updateScore(points) {
     points = Number(points)
     score += points
     $scoreInput.value = score
+}
+
+function handleMineClick() {
+    console.log('doing game over stuff')
+    clearInterval(timerId) // stop movement
+    console.log('timer disabled')
+    $gameBoard.removeEventListener('click', handleGamePieceClicked)
+    console.log('event listener removed (hopefully)')
+    $gameBoard.classList.add('filtered')
+    console.log('game board filtered')
 }
