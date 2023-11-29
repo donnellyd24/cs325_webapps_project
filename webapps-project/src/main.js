@@ -59,11 +59,8 @@ function updateScore(points) {
 }
 
 function handleMineClick() {
-    console.log('doing game over stuff')
     clearInterval(timerId) // stop movement
-    console.log('timer disabled')
     $gameBoard.removeEventListener('click', handleGamePieceClicked)
-    console.log('event listener removed (hopefully)')
     $gameBoard.classList.add('filtered')
-    console.log('game board filtered')
+    $gameBoard.textContent="BOOM! GAME OVER!"
 }

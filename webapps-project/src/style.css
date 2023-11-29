@@ -129,6 +129,13 @@ div.mine {
 }
 
 .filtered {
+    display: flex;
+    flex-direction: column;;
     filter: brightness(70%);
     background-color: gray;
+    color: red;
+    font-size: 3em;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
