@@ -1,38 +1,140 @@
-.App {
-  text-align: center;
+@import 'assets/mine-sweeper-webfont-kit/stylesheet.css';
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font: .8em sans-serif;
+    background-color: lightgray;
+    font-family: 'mine-sweeperregular';
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+    text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header span {
+    color: green
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1, h2 {
+    text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+    color: blue;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+    color: red;
+}
+
+header {
+    align-items: center;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+}
+
+#howToPlay {
+    max-width: 20%;
+}
+
+#howToPlay p {
+    text-align: center;
+    text-decoration: underline;
+}
+
+ul, li {
+    text-decoration: none;
+}
+
+input {
+    font-family: 'mine-sweeperregular';
+    border: none;
+    margin-bottom: 5px;
+    background-color: lightgray;
+}
+
+#gameArea {
+    flex-direction: column;
+}
+
+#gameOver {
+    display: none;
+    position: absolute;
+    align-self: center;
+    border-radius: 3px;;
+    width: 950px;
+    height: 535px;
+    border: 2px solid black;
+    background-color: darkslategray;
+    opacity: 50%;
+}
+
+#gameBoard {
+    position: relative;
+    align-self: center;
+    border-radius: 3px;
+    width: 950px;
+    height: 535px;
+    border: 2px solid black;
+}
+
+div.scoreCircleLow {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    color: blue;
+}
+
+div.scoreCircleMid {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    color: green;
+}
+
+div.scoreCircleHigh {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    color: red;
+}
+
+div.scoreCircle {
+    position: absolute;
+    font-size: .8em;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+    border: 1px solid black;
+    background-color: white;
+    box-shadow: 1px 1px black;
+}
+
+div.mine {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    z-index: 10000;
+    background-size: 60px;
+}
+
+.filtered {
+    display: flex;
+    flex-direction: column;;
+    filter: brightness(70%);
+    background-color: gray;
+    color: red;
+    font-size: 3em;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
