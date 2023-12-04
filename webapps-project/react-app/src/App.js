@@ -1,15 +1,65 @@
 import './App.css';
 
+import { useState, useRef, forwardRef, useEffect } from 'react'
+import { Mine } from './components/Mine';
+import { ScoreCircle } from './components/ScoreCircle';
+
+const MINE_RADIUS = 30 //px
+const MINE_DIAMETER = 60 
+const SCORE_RADIUS = 15 
+const SCORE_DIAMETER = 30 
+
 function App() {
+  const [dimensions, setDimensions] = useState({width: 0, height: 0})
+  const GameBoardRef = useRef(null)
+  useEffect(() => {
+    if (GameBoardRef.current) {
+      const el = GameBoardRef.current
+      setDimensions({ width: el.clientWidth, height: el.clientHeight })
+      console.log(dimensions)
+    }
+  }, [])
+
+  const mineLocation = getRandomLocation(dimensions, MINE_DIAMETER)
+
+  const scoreCircleLocation = getRandomLocation(dimensions, SCORE_DIAMETER)
+  console.log(mineLocation)
+
+  return (
+    <>
+    <Header></Header>
+    <section id="game">
+      <HowToPlay></HowToPlay>
+      <section>
+        <ScoreBar></ScoreBar>
+        <GameBoard ref={GameBoardRef}>
+          <ScoreCircle location={scoreCircleLocation}></ScoreCircle>
+          <Mine location={mineLocation}></Mine>
+        </GameBoard>
+      </section>
+    </section>
+    </>
+  );
+}
+
+export default App;
+
+function Header() {
   return (
     <>
     <header>
-        <h1>Dale Donnelly, CS325 Webapps Project</h1>
-        <h2>Avoid the Sweeping Mines</h2>
-        <span>This Project was inspired by <a href="https://minesweeperonline.com/" target="_blank">Minesweeper</a></span>
+      <h1>Dale Donnelly, CS325 Webapps Project</h1>
+      <h2>Avoid the Sweeping Mines</h2>
+      <span>This Project was inspired by <a href="https://minesweeperonline.com/" target="_blank">Minesweeper</a></span>
     </header>
-    <section id="game">
-        <div id="howToPlay">
+    </>
+  )
+}
+
+function HowToPlay () {
+  return (
+    <>
+    <div id="howToPlay">
             <p>How to Play</p>
             <ul>
                 <li>Point circles and mines will move around the play area.</li>
@@ -18,43 +68,30 @@ function App() {
                 <li>Avoid the mines, or it's game over!</li>
             </ul>
         </div>
-        <span>Score: <input readonly id="score" size="4" /></span>
-        <GameBoard>
-              <ScoreCircle></ScoreCircle>
-              <Mine></Mine>
-        </GameBoard>
-    </section>
-    </>
-  );
-}
-
-export default App;
-
-function GameBoard({ children }) {
-  // TODO
-  return (
-    <>
-      <div id="gameBoard">
-        {children}
-      </div>
-    </>
-  );
-}
-
-function Mine() {
-  // TODO
-  return (
-    <>
-      <span>Mine</span>
     </>
   )
 }
 
-function ScoreCircle() {
-  // TODO
+function ScoreBar() {
+  let points = 0
   return (
     <>
-    <span>Score Circle</span>
+      <span>Score: {points} </span>
     </>
   )
+}
+
+const GameBoard = forwardRef(({children}, ref) => {
+  return (
+    <div id="gameBoard" ref={ref}>
+      {children}
+    </div>
+  )
+})
+
+function getRandomLocation(dimensions, diameter) {
+  return {
+    x: diameter + Math.random() * (dimensions.width - 2 * diameter),
+    y: diameter + Math.random() * (dimensions.height - 2 * diameter)
+  }
 }
