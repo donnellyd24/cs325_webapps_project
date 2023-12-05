@@ -13,6 +13,7 @@ function App() {
   const [dimensions, setDimensions] = useState({width: 950, height: 535})
   const [score, setScore] = useState(0)
   const [mineLocation, setMineLocation] = useState(getRandomLocation(dimensions, MINE_DIAMETER))
+  const [scoreLocation, setScoreLocation] = useState(getRandomLocation(dimensions, SCORE_DIAMETER))
 
   const GameBoardRef = useRef(null)
   useEffect(() => {
@@ -21,8 +22,6 @@ function App() {
       setDimensions({ width: el.clientWidth, height: el.clientHeight })
     }
   }, [])
-
-  const scoreCircleLocation = getRandomLocation(dimensions, SCORE_DIAMETER)
 
   const handleScoreCircleClick = (score) => {
     console.log('score circle clicked')
@@ -37,7 +36,7 @@ function App() {
       <section>
         <ScoreBar score={score}></ScoreBar>
         <GameBoard ref={GameBoardRef}>
-          <ScoreCircle location={scoreCircleLocation} onScoreCircleClick={handleScoreCircleClick}></ScoreCircle>
+          <ScoreCircle location={scoreLocation} onScoreCircleClick={handleScoreCircleClick}></ScoreCircle>
           <Mine location={mineLocation}></Mine>
         </GameBoard>
       </section>
