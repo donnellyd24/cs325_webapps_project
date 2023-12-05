@@ -10,6 +10,7 @@ const SCORE_RADIUS = 15
 const SCORE_DIAMETER = 30 
 
 function App() {
+  const [isActive, setIsActive] = useState(true)
   const [dimensions, setDimensions] = useState({width: 950, height: 535})
   const [score, setScore] = useState(0)
   const [mineLocation, setMineLocation] = useState(getRandomLocation(dimensions, MINE_DIAMETER))
@@ -21,7 +22,24 @@ function App() {
       const el = GameBoardRef.current
       setDimensions({ width: el.clientWidth, height: el.clientHeight })
     }
-  }, [])
+
+    let interval
+    if (isActive) {
+      interval = setInterval(() => {
+        setMineLocation(getRandomLocation(dimensions, MINE_RADIUS))
+        setScoreLocation(getRandomLocation(dimensions, SCORE_RADIUS))
+      }, 1000)
+      return () => {clearInterval(interval)}
+    } else if (!isActive) {
+      console.log('not active')
+      clearInterval(interval)
+    }
+  }, [isActive])
+
+  const handleMineClick = () => {
+    console.log('mine clicked')
+    setIsActive(false)
+  }
 
   const handleScoreCircleClick = (score) => {
     console.log('score circle clicked')
@@ -37,7 +55,7 @@ function App() {
         <ScoreBar score={score}></ScoreBar>
         <GameBoard ref={GameBoardRef}>
           <ScoreCircle location={scoreLocation} onScoreCircleClick={handleScoreCircleClick}></ScoreCircle>
-          <Mine location={mineLocation}></Mine>
+          <Mine location={mineLocation} onMineClick={handleMineClick}></Mine>
         </GameBoard>
       </section>
     </section>
