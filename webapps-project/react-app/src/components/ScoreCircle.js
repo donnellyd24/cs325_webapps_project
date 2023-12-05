@@ -1,12 +1,15 @@
-export function ScoreCircle({location}) {
+export function ScoreCircle({location, onScoreCircleClick}) {
     // TODO
+    const points = 5
     const {x, y} = location
     return (
       <>
-        <div className='scoreCircle' style={{
+        <div className='scoreCircle' 
+        onClick={() => onScoreCircleClick(points)}
+        style={{
             left: x,
             top: y
-        }}></div>
+        }}>{points}</div>
       </>
     )
   }

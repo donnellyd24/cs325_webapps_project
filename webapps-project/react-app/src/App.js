@@ -10,20 +10,24 @@ const SCORE_RADIUS = 15
 const SCORE_DIAMETER = 30 
 
 function App() {
-  const [dimensions, setDimensions] = useState({width: 0, height: 0})
+  const [dimensions, setDimensions] = useState({width: 950, height: 535})
+  const [score, setScore] = useState(0)
+  const [mineLocation, setMineLocation] = useState(getRandomLocation(dimensions, MINE_DIAMETER))
+
   const GameBoardRef = useRef(null)
   useEffect(() => {
     if (GameBoardRef.current) {
       const el = GameBoardRef.current
       setDimensions({ width: el.clientWidth, height: el.clientHeight })
-      console.log(dimensions)
     }
   }, [])
 
-  const mineLocation = getRandomLocation(dimensions, MINE_DIAMETER)
-
   const scoreCircleLocation = getRandomLocation(dimensions, SCORE_DIAMETER)
-  console.log(mineLocation)
+
+  const handleScoreCircleClick = (score) => {
+    console.log('score circle clicked')
+    setScore(s => s + score)
+  }
 
   return (
     <>
@@ -31,9 +35,9 @@ function App() {
     <section id="game">
       <HowToPlay></HowToPlay>
       <section>
-        <ScoreBar></ScoreBar>
+        <ScoreBar score={score}></ScoreBar>
         <GameBoard ref={GameBoardRef}>
-          <ScoreCircle location={scoreCircleLocation}></ScoreCircle>
+          <ScoreCircle location={scoreCircleLocation} onScoreCircleClick={handleScoreCircleClick}></ScoreCircle>
           <Mine location={mineLocation}></Mine>
         </GameBoard>
       </section>
@@ -72,11 +76,10 @@ function HowToPlay () {
   )
 }
 
-function ScoreBar() {
-  let points = 0
+function ScoreBar({score}) {
   return (
     <>
-      <span>Score: {points} </span>
+      <span>Score: {score} </span>
     </>
   )
 }

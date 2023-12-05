@@ -101,4 +101,7 @@ input {
     border-radius: 15px;
     background-color: blue;
     border: 1px solid black;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
