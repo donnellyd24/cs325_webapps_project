@@ -31,18 +31,15 @@ function App() {
       }, 1000)
       return () => {clearInterval(interval)}
     } else if (!isActive) {
-      console.log('not active')
       clearInterval(interval)
     }
   }, [isActive])
 
   const handleMineClick = () => {
-    console.log('mine clicked')
     setIsActive(false)
   }
 
   const handleScoreCircleClick = (score) => {
-    console.log('score circle clicked')
     setScore(s => s + score)
   }
 
@@ -54,8 +51,8 @@ function App() {
       <section>
         <ScoreBar score={score}></ScoreBar>
         <GameBoard ref={GameBoardRef}>
-          <ScoreCircle location={scoreLocation} onScoreCircleClick={handleScoreCircleClick}></ScoreCircle>
-          <Mine location={mineLocation} onMineClick={handleMineClick}></Mine>
+          <ScoreCircle location={scoreLocation} onScoreCircleClick={handleScoreCircleClick} disabled={!isActive}></ScoreCircle>
+          <Mine location={mineLocation} onMineClick={handleMineClick} disabled={!isActive}></Mine>
         </GameBoard>
       </section>
     </section>
