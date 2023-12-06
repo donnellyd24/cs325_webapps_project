@@ -1,5 +1,7 @@
 ﻿A Basic Webgame all about avoiding mines!
 
+This workspace contains two projects, one in normal JS and the other using React. They are wholly separate, with individual packages, dependencies, etc. The basic-js version is more complete, but both are still functional.
+
 Run commands from inside the webapps-project directory!
 
 To run the basic-js version:
@@ -14,7 +16,7 @@ To run the react version:
 - run command: npm run server
 - open a second cli terminal
 - run command: npm run client
-  - local dev is hosted via exprss on localhost:5137
+  - local dev server is hosted via exprss on localhost:5137
 
 Minesweeper Font used in this project: https://fontstruct.com/fontstructions/download/1501665
 Font License: https://creativecommons.org/licenses/by-sa/3.0/
