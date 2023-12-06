@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useState, useRef, forwardRef, useEffect } from 'react'
+// import { Mine } from './components/Mine';
 import { Mine } from './components/Mine';
 import { ScoreCircle } from './components/ScoreCircle';
 

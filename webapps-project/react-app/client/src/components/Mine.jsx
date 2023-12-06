@@ -1,5 +1,3 @@
-import { randomCoordinate } from "../App"
-
 export function Mine({location, onMineClick, disabled}) {
     // TODO
     const { x , y } = location
