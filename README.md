@@ -1,6 +1,6 @@
 ﻿A Basic Webgame all about avoiding mines!
 
-This workspace contains two projects, one in normal JS and the other using React. They are wholly separate, with individual packages, dependencies, etc. The basic-js version is more complete, but both are still functional.
+This workspace contains two projects, one in normal JS and the other using React. They are wholly separate, with individual packages, dependencies, etc. The basic-js version is more complete in terms of game functionality, but the react version should satisfy all required project criteria.
 
 Run commands from inside the webapps-project directory!
 
