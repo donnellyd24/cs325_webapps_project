@@ -1,7 +1,6 @@
 import './App.css';
 
 import { useState, useRef, forwardRef, useEffect } from 'react'
-// import { Mine } from './components/Mine';
 import { Mine } from './components/Mine';
 import { ScoreCircle } from './components/ScoreCircle';
 
@@ -16,6 +15,17 @@ function App() {
   const [score, setScore] = useState(0)
   const [mineLocation, setMineLocation] = useState(getRandomLocation(dimensions, MINE_DIAMETER))
   const [scoreLocation, setScoreLocation] = useState(getRandomLocation(dimensions, SCORE_DIAMETER))
+
+  const [apiJson, setApiJson] = useState('not from the api')
+  useEffect(() => {
+    fetch("http://localhost:3000/json")
+      .then(r => r.json())
+      .then(json => {
+        console.log(`json retrieved: ${json.content}`)
+        setApiJson(json.content)
+      })
+    console.log(apiJson)
+  }, [])
 
   const GameBoardRef = useRef(null)
   useEffect(() => {
@@ -57,6 +67,7 @@ function App() {
         </GameBoard>
       </section>
     </section>
+    <div>API JSON: {apiJson}</div>
     </>
   );
 }
